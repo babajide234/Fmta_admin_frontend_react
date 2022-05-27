@@ -10,11 +10,12 @@ jobs:
 
     steps:
     - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      uses: actions/cache@v2
+      with:
+        path: |
+          **/node_modules
+        key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
     - uses: actions/checkout@v2
     - name: Use Node.js 18.x
       uses: actions/setup-node@v1
