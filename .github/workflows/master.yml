@@ -5,9 +5,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - name: Cache dependencies
       uses: actions/cache@v2
@@ -28,3 +26,25 @@ jobs:
       with:
         cmd: build # will run `yarn build` command
     - uses: borales/actions-yarn@v2.3.0
+    - name: Create deployment artifact
+      run: tar -czf app.tar.gz --exclude=*.git --exclude=node_modules --exclude=tests *
+    - name: Archive Production Artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: build
+        path: build
+  web-deploy:
+    needs: build
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+    
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@4.2.0
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: /public_html/admin-prod/
