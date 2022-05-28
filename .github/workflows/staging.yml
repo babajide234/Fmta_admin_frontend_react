@@ -1,0 +1,4 @@
+name: fmta_dev_staging
+on:
+  push:
+    branches: [ staging ]
