@@ -18,11 +18,12 @@ import Page404 from './views/pages/page404/Page404.jsx';
 import Page500 from './views/pages/page500/Page500.jsx';
 import ProtectedRoutes from './prtectedoutes';
 import { useSelector, useDispatch } from 'react-redux';
-import {refresh} from './app/authSlice';
+import { refresh } from './app/authSlice';
 import ls from 'localstorage-slim'
 
 function App(){
   const { isLoggedin } = useSelector((state)=> state.auth)
+  
   ls.config.encrypt = true;
   
   const dispatch = useDispatch();

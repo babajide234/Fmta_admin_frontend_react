@@ -1,17 +1,23 @@
 // If you want to override variables do it here
+// eslint-disable-next-line
 @import "variables";
-
+// eslint-disable-next-line
 $enable-ltr: true;
+// eslint-disable-next-line
 $enable-rtl: true;
 
 // Import CoreUI for React components library
+// eslint-disable-next-line 
 @import "@coreui/coreui/scss/coreui";
 
 // Import Chart.js custom tooltips styles
+// eslint-disable-next-line 
 @import "@coreui/chartjs/scss/coreui-chartjs";
-
+// eslint-disable-next-line
 @import "layout";
+// eslint-disable-next-line
 @import "example";
 
 // If you want to add custom CSS you can put it here.
+// eslint-disable-next-line
 @import "custom";

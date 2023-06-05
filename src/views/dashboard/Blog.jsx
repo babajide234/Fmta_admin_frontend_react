@@ -57,6 +57,7 @@ const Blog = () => {
     const [subtitle,setSubtitle] = useState('')
     const [postbody,setpostbody] = useState('')
     const [postimage,setpostimage] = useState('')
+    const [postimageuri,setpostimageuri] = useState('')
     const editorRef = useRef(null);
 
     const [toast, addToast] = useState(0)
@@ -155,7 +156,8 @@ const Blog = () => {
           hidden : 0,
           fav : 0,
           new: 0,
-          published:0
+          published:0,
+          image:''
         }
         dispatch(addBlogPost(payload))
         if(addStatus){
@@ -170,7 +172,7 @@ const Blog = () => {
       const handleFileChange=(event) =>{
 
         let files = event.target.files;
-
+        setpostimageuri(files)
         let reader = new FileReader();
 
         reader.readAsDataURL(files[0]);
@@ -179,7 +181,7 @@ const Blog = () => {
             setpostimage(e.target.result)
         }
         console.log(postimage)
-    }
+      }
       const columns = [
               { col:'title' },
               { col:'author' },
@@ -343,7 +345,7 @@ const Blog = () => {
                               label="Title"
                               text="Must be 8-20 characters long."
                               aria-describedby="exampleFormControlInputHelpInline"
-                              value={singlePost.title}
+                              value={title}
                               onChange={e => settitle(e.target.value)}
                               className=' mb-4'
 
@@ -354,7 +356,7 @@ const Blog = () => {
                               label="Sub Title"
                               text="Must be 8-20 characters long."
                               aria-describedby="exampleFormControlInputHelpInline"
-                              value={singlePost.subtitle}
+                              value={subtitle}
                               onChange={e => setSubtitle(e.target.value)}
                               className=' mb-4'
                             />
@@ -368,14 +370,14 @@ const Blog = () => {
 
                               />
                             <CFormLabel for='formFile' className="file-upload mb-4">
-                              <img src={postimage} alt="" srcset="" />
+                              <img src={postimage} name='image' alt="" srcset="" />
                             </CFormLabel>
                             <Editor
                               apiKey='50wdqgqz88fpl68n52tmf8ilkr5udtv1jwcbcymq1f2xe9bo'
-                              onInit={(evt, editor) => editorRef.current = editor}
-                              initialValue={singlePost.postbody}
-                              value={singlePost.postbody}
-                              onChange={e => setpostbody(e.target.value)}
+                              // onInit={(evt, editor) => editorRef.current = editor}
+                              // initialValue={postbody}
+                              value={postbody}
+                              onEditorChange={e => setpostbody(e.target.value)}
                               init={{
                                 height: 500,
                                 menubar: false,

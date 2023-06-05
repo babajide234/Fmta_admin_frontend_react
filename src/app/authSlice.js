@@ -15,6 +15,7 @@ export const login = createAsyncThunk('login',async (payload)=>{
         return console.log(error);
     }
 })
+
 export const authSlice = createSlice({
     name:'Auth',
     initialState,
